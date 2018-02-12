@@ -49,6 +49,7 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
     "tp-fest-loader": "^1.0.0",
+    "typescript": "^2.7.1",
     "webpack": "^3.5.5",
     "webpack-merge": "^4.1.0"
   },
