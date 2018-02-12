@@ -10,7 +10,8 @@
     "eslint": "./node_modules/.bin/eslint ./src/",
     "eslint-fix": "./node_modules/.bin/eslint --fix ./src/",
     "postinstall": "npm run webpack",
-    "test": "./node_modules/.bin/karma start tests/karma.conf.js --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/karma start tests/karma.conf.js --single-run --browsers PhantomJS",
+    "tslint": "./node_modules/.bin/tslint ./src/*.ts"
   },
   "author": "",
   "license": "ISC",
@@ -49,6 +50,8 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
     "tp-fest-loader": "^1.0.0",
+    "ts-loader": "^3.5.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.7.1",
     "webpack": "^3.5.5",
     "webpack-merge": "^4.1.0"
