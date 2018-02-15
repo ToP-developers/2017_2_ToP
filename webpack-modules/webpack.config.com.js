@@ -10,7 +10,7 @@ module.exports = {
         main: [
             'babel-polyfill',
             './src/static/css/main.scss',
-            './src/index.js'
+            './src/index.ts'
         ]
     },
 
@@ -20,12 +20,18 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js', '.ts', '.tsx']
     },
 
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                enforce: 'pre',
                 test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
