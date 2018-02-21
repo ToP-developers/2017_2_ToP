@@ -19,8 +19,8 @@ export default class Table extends TopComponent {
     }
 
     _build() {
-        this.head = new THead(this.getData().head);
-        this.body = new TBody(this.getData().body);
+        this.head = new THead(this.getData().head || []);
+        this.body = new TBody(this.getData().body || []);
         this.append(this.head.render());
         this.append(this.body.render());
     }

@@ -23,14 +23,14 @@ export default class TopComponent {
      * Устанавливает данные элемента
      * @param {*} data -  объект с данными
      */
-    setData(data: any) {
+    protected setData(data: any) {
         this._data = data;
     }
 
     /**
      * Возвращает данные элемента
      */
-    getData() {
+    protected getData() {
         return this._data;
     }
 
@@ -98,7 +98,7 @@ export default class TopComponent {
     /**
      * Очищает себя
      */
-    clear() {
+    protected clear() {
         while (this._component.firstChild) {
             this._component.removeChild(this._component.firstChild);
         }
