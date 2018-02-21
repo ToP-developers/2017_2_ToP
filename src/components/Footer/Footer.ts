@@ -1,4 +1,4 @@
-import footer from './Footer.xml';
+const footer = require('./Footer.xml');
 import TopComponent from '../TopComponent/TopComponent';
 
 import './Footer.scss';

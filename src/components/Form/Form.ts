@@ -1,4 +1,4 @@
-import form from './Form.xml';
+const form = require('./Form.xml');
 
 import TopComponent from '../TopComponent/TopComponent';
 import BackButton from '../BackButton/BackButton';

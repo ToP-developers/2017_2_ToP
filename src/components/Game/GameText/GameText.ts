@@ -1,4 +1,4 @@
-import gameText from './GameText.xml';
+const gameText = require('./GameText.xml');
 import TopComponent from '../../TopComponent/TopComponent';
 
 import './GameText.scss';

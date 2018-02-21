@@ -1,4 +1,4 @@
-import recordPlayer from './RecordPlayer.xml';
+const recordPlayer = require('./RecordPlayer.xml');
 import TopComponent from '../../TopComponent/TopComponent';
 import RecordService from '../../../services/RecorderService/RecorderService';
 

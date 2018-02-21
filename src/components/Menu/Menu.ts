@@ -1,4 +1,4 @@
-import menu from './Menu.xml';
+const menu = require('./Menu.xml');
 import TopComponent from '../TopComponent/TopComponent';
 import Button from '../Button/Button';
 import UserService from '../../services/UserService/UserService';

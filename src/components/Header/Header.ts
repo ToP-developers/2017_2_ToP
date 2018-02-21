@@ -1,4 +1,4 @@
-import header from './Header.xml';
+const header = require('./Header.xml');
 import TopComponent from '../TopComponent/TopComponent';
 
 import './Header.scss';

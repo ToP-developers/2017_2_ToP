@@ -1,4 +1,4 @@
-import backButton from './BackButton.xml';
+const backButton = require('./BackButton.xml');
 import TopComponent from '../TopComponent/TopComponent';
 
 import './BackButton.scss';

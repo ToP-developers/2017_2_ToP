@@ -1,4 +1,4 @@
-import audioPlayer from './AudioPlayer.xml';
+const audioPlayer = require('./AudioPlayer.xml');
 import TopComponent from '../../TopComponent/TopComponent';
 import {b64toBlob} from '../../../modules/Base64Converter/Base64Converter';
 

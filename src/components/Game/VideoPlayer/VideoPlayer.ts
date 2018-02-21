@@ -1,4 +1,4 @@
-import videoPlayer from './VideoPlayer.xml';
+const videoPlayer = require('./VideoPlayer.xml');
 import TopComponent from '../../TopComponent/TopComponent';
 
 import './VideoPlayer.scss';

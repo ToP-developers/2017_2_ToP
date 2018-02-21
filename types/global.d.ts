@@ -13,6 +13,4 @@ interface Element {
     value: any;
 }
 
-declare module '*.xml' {
-    export default function(params?:object): string;
-}
+declare var require: any;

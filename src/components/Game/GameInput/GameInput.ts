@@ -1,4 +1,4 @@
-import gameInput from './GameInput.xml';
+const gameInput = require('./GameInput.xml');
 import TopComponent from '../../TopComponent/TopComponent';
 
 import './GameInput.scss';

@@ -1,5 +1,5 @@
+const head = require('./Head.xml');
 import TopComponent from '../../TopComponent/TopComponent';
-import head from './Head.xml';
 
 export default class THead extends TopComponent {
     constructor(data: any, className: string = '') {

@@ -1,4 +1,4 @@
-import description from './Description.xml';
+const description = require('./Description.xml');
 import TopComponent from '../TopComponent/TopComponent';
 
 import './Description.scss';

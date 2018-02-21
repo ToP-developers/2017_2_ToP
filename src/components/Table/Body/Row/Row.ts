@@ -1,5 +1,5 @@
+const cells = require('./Row.xml');
 import TopComponent from '../../../TopComponent/TopComponent';
-import cells from './Row.xml';
 
 export default class TRow extends TopComponent {
     constructor(data: any, className = '') {
