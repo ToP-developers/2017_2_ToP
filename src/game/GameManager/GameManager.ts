@@ -3,7 +3,10 @@ import MultiPlayerStrategy from '../Strategy/Multiplayer/MultiPlayerStrategy';
 import {MULTIPLAYER, SINGLEPLAYER} from '../../constants/Game';
 
 export default class GameManager {
-    constructor(type) {
+    private _type: string;
+    private strategy: SinglePlayerStrategy | MultiPlayerStrategy;
+
+    constructor(type:string) {
         this._type = type;
         this.strategy = null;
         this.start();

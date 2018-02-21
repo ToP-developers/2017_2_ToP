@@ -7,6 +7,9 @@ import {RIGHT, WRONG} from '../../Constants/Game';
 import MUSIC_LIST from '../../Constants/Singleplayer';
 
 export default class SinglePlayerOfflineStrategy extends BaseStrategy {
+    private title: string;
+    private file: string;
+
     constructor() {
         super();
     }
@@ -19,7 +22,7 @@ export default class SinglePlayerOfflineStrategy extends BaseStrategy {
         this._initRecordingPage(this.file);
     }
 
-    _initRecordingPage(data) {
+    private _initRecordingPage(data: any) {
         const recordingPage = new Recording({musicSource: data}, true);
         recordingPage.getSubmitButton().addMultiEvents('click touchend', () => {
             recordingPage.hide();
@@ -33,7 +36,7 @@ export default class SinglePlayerOfflineStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initListeningPage(data) {
+    private _initListeningPage(data: any) {
         const listeningPage = new Listening({musicSource: data});
         listeningPage.getSubmitButton().addMultiEvents('click touchend', () => {
             listeningPage.hide();
@@ -52,7 +55,7 @@ export default class SinglePlayerOfflineStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initEndingPage(data) {
+    private _initEndingPage(data: any) {
         const endingPage = new Ending({isWin: data.message === RIGHT, isOffline: true});
         endingPage.getBackButton().addMultiEvents('click touchend', () => {
             this.finish();

@@ -4,6 +4,9 @@ import loading from '../../components/Loading/Loading';
 import './GameScene.scss';
 
 export default class GameScene extends TopComponent {
+    private static __instance: GameScene;
+    private _stage: TopComponent;
+
     constructor() {
         super('div', {class: 'content__game__scene'});
         if (GameScene.__instance) {
@@ -14,7 +17,7 @@ export default class GameScene extends TopComponent {
         GameScene.__instance = this;
     }
 
-    setStage(stage) {
+    setStage(stage: TopComponent) {
         this._stage = stage;
         this._rerender();
     }
@@ -32,7 +35,7 @@ export default class GameScene extends TopComponent {
         this.show();
     }
 
-    _render() {
+    private _render() {
         if (this._stage) {
             this.append(this._stage.render());
             loading.hide();
@@ -40,7 +43,7 @@ export default class GameScene extends TopComponent {
         this.renderTo('content__game');
     }
 
-    _rerender() {
+    private _rerender() {
         loading.show();
         this.clear();
         this._render();

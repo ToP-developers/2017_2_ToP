@@ -16,12 +16,13 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         super(SINGLEPLAYER);
 
         if (!UserService.isLoggedIn()) {
-            return this._startOffline();
+            this._startOffline();
+            return;
         }
 
-        this._socket.onmessage = this.onMessage.bind(this);
+        this.socket.onmessage = this.onMessage.bind(this);
 
-        this._socket.onclose = event => {
+        this.socket.onclose = event => {
             console.log('closed');
             if (event.code === NO_INTERNET_ERROR) {
                 this._startOffline();
@@ -29,7 +30,7 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         };
     }
 
-    onMessage({data: messageString}) {
+    onMessage({data: messageString}: { data: string }) {
         const message = JSON.parse(messageString);
         switch (message.type) {
             case PREGAME_DATA:
@@ -46,7 +47,7 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         }
     }
 
-    _initRecordingPage(data) {
+    private _initRecordingPage(data: any) {
         const recordingPage = new Recording({musicBase64: data});
         recordingPage.getSubmitButton().addMultiEvents('click touchend', async () => {
 
@@ -67,7 +68,7 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initListeningPage(data) {
+    private _initListeningPage(data: any) {
         const listeningPage = new Listening({musicBase64: data});
         listeningPage.getSubmitButton().addMultiEvents('click touchend', () => {
             listeningPage.stopPlayer();
@@ -84,7 +85,7 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initEndingPage(data) {
+    private _initEndingPage(data: any) {
         const endingPage = new Ending({isWin: data.result, score: data.score});
         endingPage.getBackButton().addMultiEvents('click touchend', () => {
             this.finish();
@@ -93,7 +94,7 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initPreGame() {
+    private _initPreGame() {
         const preGamePage = new PreGame();
         preGamePage.getNewGameButton().addMultiEvents('click touchend', () => {
             const result = {
@@ -113,8 +114,8 @@ export default class SinglePlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _startOffline() {
-        this._socket.close();
+    private _startOffline() {
+        this.socket.close();
         Object.setPrototypeOf(this, SinglePlayerOfflineStrategy.prototype);
         this.init();
     }

@@ -5,6 +5,5 @@ export const TABLE_DATA = {
         'User',
         'Singleplayer',
         'Multiplayer'
-    ],
-    body: []
+    ]
 };

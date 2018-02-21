@@ -11,16 +11,19 @@ import {SINGER, LISTENER, RECORDNG_MESSAGE, READY_MESSAGE1, READY_MESSAGE2, GOT_
 import {MULTIPLAYER} from '../../../constants/Game';
 
 export default class MultiPlayerStrategy extends BaseStrategy {
+    private role: string;
+    private secondUser: string;
+
     constructor() {
         super(MULTIPLAYER);
 
-        this._socket.onmessage = this.onMessage.bind(this);
+        this.socket.onmessage = this.onMessage.bind(this);
 
         this.role = null;
         this.secondUser = null;
     }
 
-    onMessage({data: messageString}) {
+    onMessage({data: messageString} : {data: string}) {
         const message = JSON.parse(messageString);
         switch (message.type) {
             case PREGAME_DATA:
@@ -39,7 +42,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         }
     }
 
-    _initPreGame(data) {
+    _initPreGame(data:any) {
         this.role = data.role;
         this.secondUser = data.secondUser;
         if (this.role === LISTENER) {
@@ -53,7 +56,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initRecordingPage(data) {
+    _initRecordingPage(data:any) {
         const recordingPage = new Recording({musicBase64: data});
         recordingPage.getSubmitButton().addMultiEvents('click touchend', async () => {
             recordingPage.stopPlayer();
@@ -77,7 +80,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _recording(data) {
+    _recording(data:any) {
         if (this.role === SINGER) {
             this.stage.addAudio(data, READY_MESSAGE1);
         } else {
@@ -85,7 +88,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         }
     }
 
-    _listening(data) {
+    _listening(data:any) {
         if (this.role === SINGER) {
             this.stage.addAudio(data, READY_MESSAGE2);
             this.stage.setStatus(WAIT_ANSWER);
@@ -94,7 +97,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         }
     }
 
-    _initListeningPage(data) {
+    _initListeningPage(data:any) {
         const listeningPage = new Listening({musicBase64: data});
         listeningPage.getSubmitButton().addMultiEvents('click touchend', () => {
             listeningPage.hide();
@@ -111,7 +114,7 @@ export default class MultiPlayerStrategy extends BaseStrategy {
         this.next();
     }
 
-    _initEndingPage(data) {
+    _initEndingPage(data:any) {
         const nextStage = () => {
             const endingPage = new Ending({isWin: data.result, score: data.score});
             endingPage.getBackButton().addMultiEvents('click touchend', () => {
