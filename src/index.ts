@@ -5,9 +5,9 @@ import Scoreboard from './views/Scoreboard/Scoreboard.js';
 import SinglePlayer from './views/SinglePlayer/SinglePlayer.js';
 import MultiPlayer from './views/MultiPlayer/MultiPlayer.js';
 
-import Header from './components/Header/Header.js';
-import Loading from './components/Loading/Loading.js';
-import TopComponent from './components/TopComponent/TopComponent.js';
+import Header from './components/Header/Header';
+import Loading from './components/Loading/Loading';
+import TopComponent from './components/TopComponent/TopComponent';
 
 import RouterRegister from './modules/RouterRegister/RouterRegister.js';
 import MultiEventsRegister from './modules/MultiEvents/MultiEvents.js';
