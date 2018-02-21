@@ -20,25 +20,21 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.ts', '.tsx']
+        extensions: ['.ts', '.tsx', '.js']
     },
 
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
+                use: ['babel-loader', 'ts-loader'],
                 exclude: /node_modules/
             },
             {
                 enforce: 'pre',
                 test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['env']
-                    }
-                }
+                use: ['babel-loader'],
+                exclude: /node_modules/
             },
             {
                 test: /\.xml/,
