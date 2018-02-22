@@ -1,4 +1,4 @@
-this.addEventListener('install', event => {
+this.addEventListener('install', (event:any) => {
     console.log('Service worker установлен');
     event.waitUntil(caches.open('APOJ_CACHE')
         .then(cache => {
@@ -27,7 +27,7 @@ this.addEventListener('install', event => {
         }));
 });
 
-this.addEventListener('fetch', event => {
+this.addEventListener('fetch', (event:any) => {
     event.respondWith(caches.match(event.request)
         .then(cachedResponse => {
 

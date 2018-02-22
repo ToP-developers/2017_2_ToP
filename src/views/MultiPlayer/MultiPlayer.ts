@@ -8,6 +8,8 @@ import loading from '../../components/Loading/Loading';
 import {MULTIPLAYER} from '../../constants/Game';
 
 export default class MultiPlayer extends TopComponent {
+    private _gameManager: GameManager;
+
     constructor() {
         super('div', {class: 'content__game'});
     }

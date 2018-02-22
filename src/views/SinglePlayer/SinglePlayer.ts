@@ -6,6 +6,8 @@ import loading from '../../components/Loading/Loading';
 import {SINGLEPLAYER} from '../../constants/Game';
 
 export default class SinglePlayer extends TopComponent {
+    private _gameManager: GameManager;
+
     constructor() {
         super('div', {class: 'content__game'});
     }

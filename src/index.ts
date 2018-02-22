@@ -1,15 +1,15 @@
-import Main from './views/Main/Main.js';
-import SignUp from './views/SignUp/SignUp.js';
-import SignIn from './views/SignIn/SignIn.js';
-import Scoreboard from './views/Scoreboard/Scoreboard.js';
-import SinglePlayer from './views/SinglePlayer/SinglePlayer.js';
-import MultiPlayer from './views/MultiPlayer/MultiPlayer.js';
+import Main from './views/Main/Main';
+import SignUp from './views/SignUp/SignUp';
+import SignIn from './views/SignIn/SignIn';
+import Scoreboard from './views/Scoreboard/Scoreboard';
+import SinglePlayer from './views/SinglePlayer/SinglePlayer';
+import MultiPlayer from './views/MultiPlayer/MultiPlayer';
 
 import Header from './components/Header/Header';
 import Loading from './components/Loading/Loading';
 import TopComponent from './components/TopComponent/TopComponent';
 
-import RouterRegister from './modules/RouterRegister/RouterRegister.js';
+import RouterRegister from './modules/RouterRegister/RouterRegister';
 import MultiEventsRegister from './modules/MultiEvents/MultiEvents.js';
 import ServiceWorkerRegister from './services/ServiceWorker/ServiceWorker.js';
 

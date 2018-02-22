@@ -61,10 +61,14 @@ const logged = {
             class: 'button-second',
             url: '/'
         }
-    ]
+    ],
+    login: ''
 };
 
 export default class Main extends TopComponent {
+    private _components: TopComponent[];
+
+
     constructor() {
         super('div', {class: 'content__main'});
     }

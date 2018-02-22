@@ -1,53 +1,41 @@
 import Form from '../../components/Form/Form';
-import Footer from '../../components/Footer/Footer';
 import TopComponent from '../../components/TopComponent/TopComponent';
 import UserService from '../../services/UserService/UserService';
 import router from '../../modules/Router/Router';
 
 const data = {
-    title: 'Регистрация',
-    icon: 'fa fa-pencil',
+    title: 'Авторизация',
+    icon: 'fa fa-lock',
     method: 'post',
-    name: 'signup',
+    name: 'signin',
     fields: [
         {
             type: 'text',
             name: 'login',
             placeholder: 'Логин...',
-            class: 'reginput'
-        },
-        {
-            type: 'email',
-            name: 'email',
-            placeholder: 'Email...',
-            class: 'reginput'
+            class: 'loginput'
         },
         {
             type: 'password',
             name: 'password',
             placeholder: 'Пароль...',
-            class: 'reginput'
-        },
-        {
-            type: 'password',
-            name: 'repeatPassword',
-            placeholder: 'Повторите пароль...',
-            class: 'reginput'
+            class: 'loginput'
         }
     ],
     buttons: [
         {
-            class: 'registrationSubmit',
-            name: 'submitButton',
-            text: 'Создать аккаунт'
+            class: 'loginSubmit',
+            text: 'Войти'
         }
     ],
     back: {}
 };
 
-export default class SignUp extends TopComponent {
+export default class SignIn extends TopComponent {
+    private _components: TopComponent[];
+
     constructor() {
-        super('div', {class: 'content__signup'}, data);
+        super('div', {class: 'content__signin'}, data);
     }
 
     show() {
@@ -71,3 +59,4 @@ export default class SignUp extends TopComponent {
         }
     }
 }
+

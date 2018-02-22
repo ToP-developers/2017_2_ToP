@@ -9,6 +9,12 @@ import Button from '../../components/Button/Button';
 import {COUNT_PER_REQUEST, TABLE_DATA} from '../../game/Constants/Scoreboard';
 
 export default class Scoreboard extends TopComponent {
+    private _components: TopComponent[];
+    private moreButton: Button;
+    private table: Table;
+    private isFull: boolean;
+    private count: number;
+
     constructor() {
         super('div', {class: 'content__scoreboard'});
         this.isFull = false;
@@ -38,9 +44,9 @@ export default class Scoreboard extends TopComponent {
     }
 
     async getRows() {
-        const rows = [];
+        const rows: any[] = [];
         const result = await Transport.get(`/stop?limit=${COUNT_PER_REQUEST}&since=${this.count}`);
-        result.forEach(({login, sscore, mscore}) => {
+        result.forEach(({login, sscore, mscore}: { login: string, sscore: string, mscore: string }) => {
             rows.push([login, sscore, mscore]);
         });
 
@@ -60,7 +66,7 @@ export default class Scoreboard extends TopComponent {
 
     _rerenderMoreButton() {
         const _table = this.table.getElement();
-        this.moreButton.getElement().setAttribute('class', _table.rows.length % 2 ? 'button-more_odd' : 'button-more_even');
+        this.moreButton.getElement().setAttribute('class', (_table as HTMLTableElement).rows.length % 2 ? 'button-more_odd' : 'button-more_even');
     }
 
     _initButton() {
