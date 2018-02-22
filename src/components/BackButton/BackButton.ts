@@ -1,0 +1,12 @@
+const backButton = require('./BackButton.xml');
+import TopComponent from '../TopComponent/TopComponent';
+
+import './BackButton.scss';
+
+export default class BackButton extends TopComponent {
+    constructor(data?: any) {
+        super('div', {'class': 'back-button'}, data);
+
+        this.getElement().innerHTML = backButton(this.getData());
+    }
+}
