@@ -20,7 +20,7 @@ export default class Transport {
      * @param {string} url - адрес запроса
      * @return {Promise}
      */
-    static get(url) {
+    static get(url: string): any {
         return Transport._send(url, METHODS.GET);
     }
 
@@ -30,7 +30,7 @@ export default class Transport {
      * @param {*} body - тело запроса
      * @return {Promise}
      */
-    static post(url, body) {
+    static post(url: string, body?: any): any {
         return Transport._send(url, METHODS.POST, body);
     }
 
@@ -41,8 +41,8 @@ export default class Transport {
      * @param {*} [body={}] - тело запроса (объект)
      * @return {Promise}
      */
-    static _send(url, _method, body = {}) {
-        const options = {
+    static _send(url: string, _method: string, body: any = {}): any {
+        const options: any = {
             method: _method,
             mode: 'cors',
             credentials: 'include'
@@ -57,7 +57,7 @@ export default class Transport {
         }
 
         return fetch(BACK_URL + url, options)
-            .then(response => {
+            .then((response: any) => {
                 if (response.status >= 400) {
                     throw response;
                 }
