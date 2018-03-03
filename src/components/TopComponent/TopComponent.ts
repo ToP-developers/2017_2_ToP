@@ -115,7 +115,7 @@ export default class TopComponent {
 }
 
 /**
- * Вставляет в paernt несколько копонент
+ * Вставляет в parent несколько копонент
  * @param {string} parentName - имя класса родителя
  * @param {TopComponent[]} childComponents - массив компонентов
  */
