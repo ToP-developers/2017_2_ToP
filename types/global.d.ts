@@ -1,5 +1,5 @@
 interface EventTarget {
-    addMultiEvents(events: string, handler: any, phase?: boolean): void;
+    addMultiEvents(events: string, handler: any, phase = false): void;
 }
 
 interface Window {
