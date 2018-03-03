@@ -9,7 +9,8 @@ export default function RouterRegister(className: string, componentsRoutes: any[
     router.connectRouting(window);
 
     UserService.getData()
-        .catch(response => {})
+        .catch((response: any) => {
+        })
         .then(() => {
             Loading.hide();
             router.start();
