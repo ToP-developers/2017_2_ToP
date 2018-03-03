@@ -1,17 +1,19 @@
 import {mergeBuffers, interleave, encodeWAV} from '../WavConverter/WavConverter';
 
 export default class Recorder {
-    constructor() {
-        this.recLength = 0;
-        this.recBuffersL = [];
-        this.recBuffersR = [];
+    private recLength: number = 0;
+    private recBuffersL: any[] = [];
+    private recBuffersR: any[] = [];
+    private recording: boolean = false;
+    private bufferLen: number = 4096;
+    private node: any = null;
 
-        this.recording = false;
+    private context: any;
+    private sampleRate: number;
+    private audioBlob: Blob;
+    private url: string;
 
-        this.bufferLen = 4096;
-    }
-
-    init(source) {
+    init(source: any) {
         this.context = source.context;
         this.sampleRate = this.context.sampleRate;
 
@@ -21,7 +23,7 @@ export default class Recorder {
             this.node = this.context.createScriptProcessor(this.bufferLen, 2, 2);
         }
 
-        this.node.addEventListener('audioprocess', e => {
+        this.node.addEventListener('audioprocess', (e: any) => {
             if (!this.recording) return;
 
             let buffers = [];
@@ -53,7 +55,7 @@ export default class Recorder {
         this.recBuffersR = [];
     }
 
-    exportWAV(callback, reverse = false) {
+    exportWAV(callback: (blob: Blob) => string, reverse: boolean = false) {
         const type = 'audio/wav';
         const bufferL = mergeBuffers(this.recBuffersL, this.recLength);
         const bufferR = mergeBuffers(this.recBuffersR, this.recLength);
@@ -70,19 +72,19 @@ export default class Recorder {
         this.url = callback(this.audioBlob);
     }
 
-    getMusicURL() {
+    getMusicURL(): string {
         return this.url;
     }
 
-    getMusicBlob() {
+    getMusicBlob(): Blob {
         return this.audioBlob;
     }
 
-    setMusicURL(url) {
+    setMusicURL(url: string) {
         this.url = url;
     }
-}
 
-Recorder.setupDownload = blob => {
-    return (window.URL || window.webkitURL).createObjectURL(blob);
-};
+    static setupDownload(blob: Blob): string {
+        return (window.URL || window.webkitURL).createObjectURL(blob);
+    }
+}

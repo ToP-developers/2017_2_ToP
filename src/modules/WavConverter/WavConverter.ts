@@ -1,4 +1,4 @@
-function mergeBuffers(recBuffers, recLength) {
+function mergeBuffers(recBuffers: any, recLength: number): Float32Array {
     let result = new Float32Array(recLength);
     let offset = 0;
     for (let i = 0; i < recBuffers.length; i++) {
@@ -8,7 +8,7 @@ function mergeBuffers(recBuffers, recLength) {
     return result;
 }
 
-function interleave(inputL, inputR) {
+function interleave(inputL: any, inputR: any): Float32Array {
     const length = inputL.length + inputR.length;
     let result = new Float32Array(length);
 
@@ -22,20 +22,20 @@ function interleave(inputL, inputR) {
     return result;
 }
 
-function floatTo16BitPCM(output, offset, input) {
+function floatTo16BitPCM(output: DataView, offset: number, input: any) {
     for (let i = 0; i < input.length; i++, offset += 2) {
         let s = Math.max(-1, Math.min(1, input[i]));
         output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
     }
 }
 
-function writeString(view, offset, string) {
+function writeString(view: DataView, offset: number, string: string) {
     for (let i = 0; i < string.length; i++) {
         view.setUint8(offset + i, string.charCodeAt(i));
     }
 }
 
-function encodeWAV(samples, mono, sampleRate) {
+function encodeWAV(samples: any, mono: number, sampleRate: number): DataView {
     let buffer = new ArrayBuffer(44 + (samples.length * 2));
     let view = new DataView(buffer);
 

@@ -1,4 +1,4 @@
-function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+function b64toBlob(b64Data: string, contentType = '', sliceSize = 512): Blob {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
 
@@ -18,7 +18,7 @@ function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     return new Blob(byteArrays, {type: contentType});
 }
 
-function BlobToB64(blob) {
+function BlobToB64(blob: Blob): any {
     return new Promise(resolve => {
         const reader = new FileReader();
         reader.onloadend = () => {

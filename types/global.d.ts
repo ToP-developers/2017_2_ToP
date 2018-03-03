@@ -13,4 +13,10 @@ interface Element {
     value: any;
 }
 
+interface Navigator {
+    webkitGetUserMedia: any;
+    mozGetUserMedia: any;
+    msGetUserMedia: any;
+}
+
 declare var require: any;
