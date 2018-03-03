@@ -1,4 +1,4 @@
-import TopComponent from '../../components/TopComponent/TopComponent';
+import TopView from '../../components/TopView/TopView';
 
 import UserService from '../../services/UserService/UserService';
 import router from '../../modules/Router/Router';
@@ -7,11 +7,11 @@ import loading from '../../components/Loading/Loading';
 
 import {MULTIPLAYER} from '../../constants/Game';
 
-export default class MultiPlayer extends TopComponent {
+export default class MultiPlayer extends TopView {
     private _gameManager: GameManager;
 
     constructor() {
-        super('div', {class: 'content__game'});
+        super({class: 'content__game'});
     }
 
     show() {

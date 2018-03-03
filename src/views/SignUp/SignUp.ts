@@ -1,5 +1,5 @@
 import Form from '../../components/Form/Form';
-import TopComponent from '../../components/TopComponent/TopComponent';
+import TopView from '../../components/TopView/TopView';
 import UserService from '../../services/UserService/UserService';
 import router from '../../modules/Router/Router';
 
@@ -44,11 +44,9 @@ const data = {
     back: {}
 };
 
-export default class SignUp extends TopComponent {
-    private _components: TopComponent[];
-
+export default class SignUp extends TopView {
     constructor() {
-        super('div', {class: 'content__signup'}, data);
+        super({class: 'content__signup'}, data);
     }
 
     show() {
@@ -67,8 +65,7 @@ export default class SignUp extends TopComponent {
             this._components = [
                 new Form(this.getData())
             ];
-            this._components.forEach(element => this.append(element.render()));
-            this.renderTo('content');
+            super.build();
         }
     }
 }

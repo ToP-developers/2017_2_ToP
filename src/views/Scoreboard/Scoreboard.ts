@@ -1,4 +1,4 @@
-import TopComponent from '../../components/TopComponent/TopComponent';
+import TopView from '../../components/TopView/TopView';
 import Table from '../../components/Table/Table';
 import BackButton from '../../components/BackButton/BackButton';
 import Transport from '../../modules/Transport/Transport';
@@ -8,24 +8,21 @@ import Button from '../../components/Button/Button';
 
 import {COUNT_PER_REQUEST, TABLE_DATA} from '../../game/Constants/Scoreboard';
 
-export default class Scoreboard extends TopComponent {
-    private _components: TopComponent[];
+export default class Scoreboard extends TopView {
     private moreButton: Button;
     private table: Table;
     private isFull: boolean;
     private count: number;
 
     constructor() {
-        super('div', {class: 'content__scoreboard'});
+        super({class: 'content__scoreboard'});
         this.isFull = false;
         this.moreButton = null;
         this.count = 0;
     }
 
     rerender() {
-        if (this._components) {
-            this._components.forEach(element => element.remove());
-        }
+        this.removeComponents();
         this.build();
     }
 
@@ -39,8 +36,8 @@ export default class Scoreboard extends TopComponent {
             this.moreButton,
             new BackButton()
         ];
-        this._components.forEach(element => this.append(element.render()));
-        this.renderTo('content');
+
+        super.build();
     }
 
     async getRows() {
@@ -64,19 +61,19 @@ export default class Scoreboard extends TopComponent {
         this._rerenderMoreButton();
     }
 
-    _rerenderMoreButton() {
+    private _rerenderMoreButton() {
         const _table = this.table.getElement();
         this.moreButton.getElement().setAttribute('class', (_table as HTMLTableElement).rows.length % 2 ? 'button-more_odd' : 'button-more_even');
     }
 
-    _initButton() {
+    private _initButton() {
         this.moreButton = new Button({text: '. . .'});
         this.moreButton.getElement().addMultiEvents('click touchend', () => {
             this.addRows();
         });
     }
 
-    _buildMoreButton() {
+    private _buildMoreButton() {
         if (!this.isFull) {
             if (!this.moreButton) {
                 this._initButton();
@@ -85,7 +82,7 @@ export default class Scoreboard extends TopComponent {
         }
     }
 
-    _deleteMoreButton() {
+    private _deleteMoreButton() {
         this.moreButton.remove();
     }
 }
