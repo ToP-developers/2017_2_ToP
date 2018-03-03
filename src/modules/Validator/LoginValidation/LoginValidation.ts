@@ -1,6 +1,6 @@
 const loginRegular = /^[a-z0-9_-]{3,15}$/;
 
-export default function LoginValidation(input, errors) {
+export default function LoginValidation(input: string, errors: any): boolean {
     const valid = loginRegular.test(input);
     if (!valid) {
         if (input.length < 3) {

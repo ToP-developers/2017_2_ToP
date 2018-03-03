@@ -1,4 +1,4 @@
-export default function PasswordValidation(input, errors) {
+export default function PasswordValidation(input: string, errors: any): boolean {
     let valid = false;
     if (input.length > 24) {
         errors.password = 'Пароль должен быть меньше 24 символов!';
