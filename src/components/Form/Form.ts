@@ -119,23 +119,23 @@ export default class FormView extends TopComponent {
 
         const data = Object.values(fields).map(field => {
             return field.name !== 'repeatPassword' ? {
-                [field.name]: field.value
-            } : {};
+                    [field.name]: field.value
+                } : {};
         });
 
         if (this.getData().method === 'post') {
             Transport.post(url, data)
-                .then(response => {
+                .then((response: any) => {
                     UserService.user = response;
 
                     const route = router.getRoute('');
-                    if (!route.getView()) {
+                    if (!route.view) {
                         route.createView();
                     }
-                    route.getView().rerender();
+                    route.view.rerender();
                     router.go('/');
                 })
-                .catch(async response => {
+                .catch(async(response: any) => {
                     if (!response.json) {
                         console.log(response);
                         return;
