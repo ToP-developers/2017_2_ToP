@@ -1,6 +1,6 @@
 import Menu from '../../components/Menu/Menu';
 import Footer from '../../components/Footer/Footer';
-import TopComponent from '../../components/TopComponent/TopComponent';
+import TopView from '../../components/TopView/TopView';
 import UserService from '../../services/UserService/UserService';
 
 const unlogged = {
@@ -65,18 +65,14 @@ const logged = {
     login: ''
 };
 
-export default class Main extends TopComponent {
-    private _components: TopComponent[];
-
+export default class Main extends TopView {
 
     constructor() {
-        super('div', {class: 'content__main'});
+        super({class: 'content__main'});
     }
 
     rerender() {
-        if (this._components) {
-            this._components.forEach(element => element.remove());
-        }
+        this.removeComponents();
         this.build();
     }
 
@@ -87,11 +83,12 @@ export default class Main extends TopComponent {
         } else {
             this.setData(unlogged);
         }
+
         this._components = [
             new Menu(this.getData()),
             new Footer()
         ];
-        this._components.forEach(element => this.append(element.render()));
-        this.renderTo('content');
+
+        super.build();
     }
 }

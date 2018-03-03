@@ -1,15 +1,15 @@
-import TopComponent from '../../components/TopComponent/TopComponent';
+import TopView from '../../components/TopView/TopView';
 
 import GameManager from '../../game/GameManager/GameManager';
 import loading from '../../components/Loading/Loading';
 
 import {SINGLEPLAYER} from '../../constants/Game';
 
-export default class SinglePlayer extends TopComponent {
+export default class SinglePlayer extends TopView {
     private _gameManager: GameManager;
 
     constructor() {
-        super('div', {class: 'content__game'});
+        super({class: 'content__game'});
     }
 
     show() {

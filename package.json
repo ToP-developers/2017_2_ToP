@@ -54,7 +54,8 @@
     "tp-fest-loader": "^1.0.0",
     "ts-loader": "^3.5.0",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.1",
+    "tslint-eslint-rules": "^5.1.0",
+    "typescript": "^2.7.2",
     "webpack": "^3.5.5",
     "webpack-merge": "^4.1.0"
   },

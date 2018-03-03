@@ -1,10 +1,15 @@
 import Route from './Route';
+import TopComponent from "../../components/TopComponent/TopComponent";
+import TopView from "../../components/TopView/TopView";
 
 /**
  * Класс роутера
  * @module Router
  */
 class Router {
+    private routes: Route[] = [];
+    private static __instance: Router;
+
     /**
      * @constructor
      * @return {Router|*}
@@ -13,8 +18,6 @@ class Router {
         if (Router.__instance) {
             return Router.__instance;
         }
-
-        this.routes = [];
 
         Router.__instance = this;
     }
@@ -25,7 +28,7 @@ class Router {
      * @param {TopComponent} view
      * @return {Router}
      */
-    use(path, view) {
+    use(path: string, view: TopView): Router {
         const route = new Route(path, view);
         this.routes.push(route);
 
@@ -46,7 +49,7 @@ class Router {
      * @param {string} path
      * @return {Route}
      */
-    getRoute(path) {
+    getRoute(path: string): Route {
         return this.routes.find(route => route.isThisPath(path));
     }
 
@@ -54,7 +57,7 @@ class Router {
      * Возвращает текущий path
      * @return {string}
      */
-    static getPath() {
+    static getPath(): string {
         const currentPath = window.location.pathname.toString().toLowerCase();
 
         return currentPath[currentPath.length - 1] === '/' ? currentPath.slice(0, -1) : currentPath;
@@ -64,7 +67,7 @@ class Router {
      * Осуществляет переключение вьюшки без перезагрузки страницы
      * @param path
      */
-    go(path) {
+    go(path: string) {
         window.history.pushState({}, '', path);
         this._onRoute();
     }
@@ -74,8 +77,8 @@ class Router {
      */
     hideAll() {
         this.routes.forEach(route => {
-            if (route.getView()) {
-                route.getView().hide();
+            if (route.view) {
+                route.view.hide();
             }
         });
     }
@@ -84,8 +87,8 @@ class Router {
      * Создает события перехода по нажатию на элемент
      * @param {EventTarget} objectListener
      */
-    connectRouting(objectListener) {
-        objectListener.addMultiEvents('click touchend', event => {
+    connectRouting(objectListener: EventTarget) {
+        objectListener.addMultiEvents('click touchend', (event: any) => {
             const url = event.target.getAttribute('data-url');
 
             if (!url || url === '') {
@@ -99,7 +102,7 @@ class Router {
      * Осуществляет переключение вьюшки по текущему пути
      * @private
      */
-    _onRoute() {
+    private _onRoute() {
         const route = this.getRoute(Router.getPath());
 
         if (!route) {

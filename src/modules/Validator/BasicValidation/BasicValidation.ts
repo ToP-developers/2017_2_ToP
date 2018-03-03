@@ -2,7 +2,7 @@ import EmailValidation from '../EmailValidation/EmailValidation';
 import LoginValidation from '../LoginValidation/LoginValidation';
 import PasswordValidation from '../PasswordValidation/PasswordValidation';
 
-export default function BasicValidation(element, errors) {
+export default function BasicValidation(element: any, errors: any): boolean {
     const valid = !(element.value === '');
     if (!valid) {
         errors[element.name] = 'Пожалуйста, введите данные!';

@@ -29,7 +29,7 @@ export default class Menu extends TopComponent {
             logoutButton.addMultiEvents('click touchend', () => {
                 UserService.logout()
                     .then(() => {
-                        router.getRoute('').getView().rerender();
+                        router.getRoute('').view.rerender();
                         router.go('/');
                     })
                     .catch((response: any) => {

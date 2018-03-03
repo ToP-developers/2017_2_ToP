@@ -10,8 +10,8 @@ import Loading from './components/Loading/Loading';
 import TopComponent from './components/TopComponent/TopComponent';
 
 import RouterRegister from './modules/RouterRegister/RouterRegister';
-import MultiEventsRegister from './modules/MultiEvents/MultiEvents.js';
-import ServiceWorkerRegister from './services/ServiceWorker/ServiceWorker.js';
+import MultiEventsRegister from './modules/MultiEvents/MultiEvents';
+import ServiceWorkerRegister from './services/ServiceWorker/ServiceWorker';
 
 
 ServiceWorkerRegister();

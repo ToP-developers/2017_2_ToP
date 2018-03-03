@@ -1,13 +1,13 @@
 import Recorder from '../../modules/Recorder/Recorder';
 
 class RecordService {
+    private context: any;
+    private audioRecorder: Recorder = new Recorder();
+    private hasMedia: boolean;
+
     constructor() {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         this.context = new AudioContext();
-        this.audioRecorder = new Recorder();
-
-        this.node = null;
-        this.source = null;
 
         this.hasMedia = false;
 
@@ -22,13 +22,13 @@ class RecordService {
         this.audioRecorder.record();
     }
 
-    stop(reverse) {
+    stop(reverse: boolean) {
         this.audioRecorder.stop();
 
         this.audioRecorder.exportWAV(Recorder.setupDownload, reverse);
     }
 
-    gotStream(stream) {
+    gotStream(stream: any) {
         const inputPoint = this.context.createGain();
         const audioInput = this.context.createMediaStreamSource(stream);
         audioInput.connect(inputPoint);
@@ -46,28 +46,33 @@ class RecordService {
             return;
         }
 
+        //constraints: MediaStreamConstraints =
+        // {
+        //     'audio': {
+        //     'mandatory': {
+        //         'googEchoCancellation': 'false',
+        //             'googAutoGainControl': 'false',
+        //             'googNoiseSuppression': 'false',
+        //             'googHighpassFilter': 'false'
+        //     },
+        //     'optional': []
+        // }
+
         navigator.getUserMedia({
-            'audio': {
-                'mandatory': {
-                    'googEchoCancellation': 'false',
-                    'googAutoGainControl': 'false',
-                    'googNoiseSuppression': 'false',
-                    'googHighpassFilter': 'false'
-                },
-                'optional': []
+            audio: true
             }
-        }, this.gotStream.bind(this), e => {
+        , this.gotStream.bind(this), (e: any) => {
             console.log(e);
         });
 
         this.hasMedia = true;
     }
 
-    getMusicURL() {
+    getMusicURL(): string {
         return this.audioRecorder.getMusicURL();
     }
 
-    getMusicBlob() {
+    getMusicBlob(): Blob {
         return this.audioRecorder.getMusicBlob();
     }
 }

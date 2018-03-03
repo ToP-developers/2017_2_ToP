@@ -1,5 +1,5 @@
 interface EventTarget {
-    addMultiEvents(events: string, handler: any, phase?: boolean): void;
+    addMultiEvents(events: string, handler: any, phase = false): void;
 }
 
 interface Window {
@@ -11,6 +11,12 @@ interface Window {
 interface Element {
     name: string;
     value: any;
+}
+
+interface Navigator {
+    webkitGetUserMedia: any;
+    mozGetUserMedia: any;
+    msGetUserMedia: any;
 }
 
 declare var require: any;

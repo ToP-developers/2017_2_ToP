@@ -1,10 +1,15 @@
 
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended"
-  ],
-  "jsRules": {},
-  "rules": {},
-  "rulesDirectory": []
+  "extends": "tslint-eslint-rules",
+  "rules": {
+    "no-constant-condition": true
+  },
+  "linterOptions": {
+    "exclude": [
+      "src/built",
+      "node_modules",
+      "server/"
+    ]
+  }
 }

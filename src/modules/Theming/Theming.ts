@@ -1,6 +1,11 @@
 export default class Theming {
+    private theme: string;
+    private link: HTMLLinkElement;
+    private linkExist: boolean;
+
     getCurrent() {
         const theme = localStorage.getItem('theme');
+
         if (theme) {
             if (theme === 'main') {
                 this.theme = 'main';
@@ -9,6 +14,7 @@ export default class Theming {
             }
             return;
         }
+
         this.theme = 'main';
     }
 
