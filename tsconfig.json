@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "src/built",
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es2017",
@@ -13,7 +13,6 @@
     "types/global.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "public/built"
+    "src/built"
   ]
 }
