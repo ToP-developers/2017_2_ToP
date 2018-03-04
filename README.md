@@ -1,7 +1,10 @@
-![Logo](assets/apoj.gif)  
+<p align="center">
+![Logo](assets/apoj.gif) 
+</p>
+
 [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP)
 
-Apoj - игра для ценителей приятной музыки и хороших шуток. Написана на TypeScript.
+Apoj - игра для ценителей приятной музыки и хороших шуток. 
 
 [**Сыграть в игру!**](apoj.me) / [**Backend репозиторий**](https://github.com/ToP-developers/Apoj-backend) / [**Frontend на heroku**](https://gametes.herokuapp.com)
 
