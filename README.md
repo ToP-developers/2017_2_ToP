@@ -1,12 +1,18 @@
-# Apoj  
-[![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP)
+<div align="center">
 
-* [Ссылка на игру](#url)
-* [Описание](#description)
-* [Установка](#install)
+  ![Logo](assets/apoj.gif)  [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP)
+</div>
+
+Apoj - игра для ценителей приятной музыки и хороших шуток. 
+
+[**Сыграть в игру!**](apoj.me) / [**Backend репозиторий**](https://github.com/ToP-developers/Apoj-backend) / [**Frontend на heroku**](https://gametes.herokuapp.com)
+
+## Содержание
+* [Описание игры](#description)
+* [Режимы игры](#modes)
+* [Установка и запуск](#install)
 * [Тесты и запуск линтера](#tests)
-* [Запуск](#launch)
-* [Средства разработки](#devstack)
+* [Технологии](#devstack)
   * [Frontend](#devstackfront)
     + [Сервер](#devstackfrontserver)
     + [Клиент](#devstackfrontclient)
@@ -17,46 +23,55 @@
   * [Backend](#backend)
 * [Bug report](#bugreport)
 
-<a name="url"></a>
-## Ссылка на игру
-
-[**Apoj!**](https://gametes.herokuapp.com)  
-
 <a name="description"></a>
-## Описание
-Apoj - игра для ценителей приятной музыки и хороших шуток. 
-Первый игрок поет песню, затем она переворачивается, дается на прослушивание второму игроку. Он по фрагментам воссоздает запись своим пением и полученное снова переворачивают. По результату и необходимо отгадать изначальную мелодию. 
+## Описание игры
+1. Первый игрок поет песню. Запись его аудио переворачивается, передается второму игроку. 
+
+2. Второй игрок слушает присланное аудио. Его задача - спеть прослушанное аудио как есть. Это записывается, отсылается на сервер, где переворачивается. 
+ 
+3. Сервер отдает перевернутое аудио, второй игрок прослушивает, ему необходимо отгадать изначальную мелодию. 
+
+<a name="modes"></a>
+## Режимы игры
+#### Singleplayer
+Режим тренировки. Для него реализован функционал игры на стороне клиента.  
+
+Задача: спеть перевернутый фрагмент и угадать изначальную песню. 
+
+
+#### Multiplayer
+Оригинальная игра из описания. Всего в игровой сессии два игрока. Взаимодействие по сокету. 
+
+Задача: качественно спеть песню или спеть перевернутый фрагмент и угадать изначальную песню. 
+
 
 <a name="install"></a>
-## Установка
+## Установка и запуск
+
+Сперва скачать репозиторий, затем в папке проекта:
 
 ```
 npm install
+npm start
 ```
-```
-npm run webpack
-```
-
 <a name="tests"></a>
 ## Тесты и запуск линтера
 
 ```sh
 npm test
-```
-
-```sh
 npm run eslint
 ```
 
-<a name="launch"></a>
-## Запуск
-
-```
-npm start
-```
-
 <a name="devstack"></a>
-## Средства разработки
+## Технологии
+<a name="devstackfrontserver"></a>
+### Особенности проекта
+
+- работа игры в офлайн режиме
+- Web Audio Api
+- работа с Media Recording API: запись аудио файлов в wav формат, переворачивание, обработка wav файлов
+- автодеплой с помощью travis на сервер
+- https, http2 
 
 <a name="devstackfront"></a>
 ### Frontend
@@ -64,28 +79,30 @@ npm start
 <a name="devstackfrontserver"></a>
 #### Сервер
 
-- Node JS
-- Express
+- Node JS, Express
+- Nginx
 
 <a name="devstackfrontclient"></a>
 #### Клиент
-
-- JavaScript
+- TypeScript, ES6
+- Service Worker
+- Web Audio API
+- Web Video API
+- Media Recording API
 
 <a name="devstackfronttools"></a>
 #### Дополнительно
 
 - Webpack
-- Sass
-- CI [TRAVIS]
-- Jasmine
 - Babel
+- Sass
+- Travis
+- Jasmine
 
 <a name="devstackback"></a>
 ### Backend
 
-- Java
-- Spring
+- Java, Spring, PostgreSQL
 
 <a name="team"></a>
 ## Команда
@@ -97,7 +114,6 @@ npm start
 <a name="backend"></a>
 ### Backend
   * [Москалев Илья](http://github.com/ilyamoskalev)
-  * [Кудинов Михаил](http://github.com/MikKud)
 
 
 <a name="bugreport"></a>
