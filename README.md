@@ -1,8 +1,4 @@
-<p align="center">
-![Logo](assets/apoj.gif) 
-</p>
-
-[![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP)
+![Logo](assets/apoj.gif)  [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_ToP)
 
 Apoj - игра для ценителей приятной музыки и хороших шуток. 
 
