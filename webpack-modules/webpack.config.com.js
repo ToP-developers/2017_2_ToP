@@ -10,7 +10,7 @@ module.exports = {
         main: [
             'babel-polyfill',
             './src/static/css/main.scss',
-            './src/index.ts'
+            './src/index.tsx'
         ]
     },
 

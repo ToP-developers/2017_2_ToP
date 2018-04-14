@@ -1,7 +1,8 @@
 import Form from '../../components/Form/Form';
-import TopView from '../../components/TopView/TopView';
 import UserService from '../../services/UserService/UserService';
 import router from '../../modules/Router/Router';
+
+import * as React from 'react';
 
 const data = {
     title: 'Регистрация',
@@ -34,38 +35,40 @@ const data = {
             class: 'reginput'
         }
     ],
-    buttons: [
-        {
-            class: 'registrationSubmit',
-            name: 'submitButton',
-            text: 'Создать аккаунт'
-        }
-    ],
+    submit: {
+        class: 'registrationSubmit',
+        name: 'submitButton',
+        text: 'Создать аккаунт'
+    },
     back: {}
 };
 
-export default class SignUp extends TopView {
-    constructor() {
-        super({class: 'content__signup'}, data);
-    }
+export default class SignUp extends React.Component<any, any> {
+    // show() {
+    //     if (UserService.isLoggedIn()) {
+    //         router.go('/');
+    //         return;
+    //     }
+    //
+    //     super.show();
+    // }
+    //
+    // build() {
+    //     if (UserService.isLoggedIn()) {
+    //         router.go('/');
+    //     } else {
+    //         this._components = [
+    //             new Form(this.getData())
+    //         ];
+    //         super.build();
+    //     }
+    // }
 
-    show() {
-        if (UserService.isLoggedIn()) {
-            router.go('/');
-            return;
-        }
-
-        super.show();
-    }
-
-    build() {
-        if (UserService.isLoggedIn()) {
-            router.go('/');
-        } else {
-            this._components = [
-                new Form(this.getData())
-            ];
-            super.build();
-        }
+    render() {
+        return (
+            <div className='content__signup'>
+                <Form {...data} />
+            </div>
+        )
     }
 }

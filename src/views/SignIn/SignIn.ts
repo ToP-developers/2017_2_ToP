@@ -22,12 +22,10 @@ const data = {
             class: 'loginput'
         }
     ],
-    buttons: [
-        {
-            class: 'loginSubmit',
-            text: 'Войти'
-        }
-    ],
+    submit: {
+        class: 'loginSubmit',
+        text: 'Войти'
+    },
     back: {}
 };
 

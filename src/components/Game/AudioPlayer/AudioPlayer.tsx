@@ -1,14 +1,11 @@
-const audioPlayer = require('./AudioPlayer.xml');
-import TopComponent from '../../TopComponent/TopComponent';
+import * as React from 'react';
 import {b64toBlob} from '../../../modules/Base64Converter/Base64Converter';
 
 import './AudioPlayer.scss';
-import Button from "../../Button/Button";
 
-export default class AudioPlayer extends TopComponent {
+export default class AudioPlayer extends React.Component<any, any> {
     private audio: HTMLAudioElement;
     private audioContext: AudioContext;
-    private isPlaying: boolean;
     private button: HTMLElement;
     private pauseButton: HTMLElement;
     private playButton: HTMLElement;
@@ -17,15 +14,37 @@ export default class AudioPlayer extends TopComponent {
     private src: any;
     private animation: any;
 
-    constructor(data: any) {
-        super('div', {class: 'audio-player'}, data);
+    private player: HTMLElement;
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            musicSource: props.musicSource,
+            isPlaying: false,
+            playButtonStyle: {},
+            pauseButtonStyle: {}
+        };
     }
 
     render() {
-        this._innerHTML(audioPlayer(this.getData()));
-        this._init();
+        return (
+            <div className='audio-player' ref={(player: any) => this.player = player}>
+                <div className='audio-player__button'>
+                    <div className='audio-player__button_play' style={this.state.playButtonStyle}>
+                        <i className='fa fa-play'/>
+                    </div>
+                    <div className='audio-player__button_pause' style={this.state.pauseButtonStyle}>
+                        <i className='fa fa-pause'/>
+                    </div>
+                </div>
+                <canvas className='audio-player__visualizer'/>
+            </div>
+        )
+    }
 
-        return this.getElement();
+    componentDidMount() {
+        this._init();
     }
 
     getButton() {
@@ -41,15 +60,17 @@ export default class AudioPlayer extends TopComponent {
     }
 
     stop() {
-        if (!this.isPlaying) {
+        if (!this.state.isPlaying) {
             return;
         }
 
-        this.isPlaying = false;
         this.audio.pause();
 
-        this.pauseButton.style.display = 'none';
-        this.playButton.style.display = 'block';
+        this.setState({
+            isPlaying: false,
+            pauseButtonStyle: {display: 'none'},
+            playButtonStyle: {display: 'block'}
+        });
     }
 
     remove() {
@@ -58,43 +79,44 @@ export default class AudioPlayer extends TopComponent {
     }
 
     start() {
-        this.isPlaying = true;
-
-        this.pauseButton.style.display = 'block';
-        this.playButton.style.display = 'none';
+        this.setState({
+            isPlaying: true,
+            pauseButtonStyle: {display: 'block'},
+            playButtonStyle: {display: 'none'}
+        });
 
         this.audio.play();
     }
 
     _initAudio() {
         this.audio.addEventListener('ended', () => {
-            this.isPlaying = false;
-            this.pauseButton.style.display = 'none';
-            this.playButton.style.display = 'block';
+            this.setState({
+                isPlaying: false,
+                pauseButtonStyle: {display: 'none'},
+                playButtonStyle: {display: 'block'}
+            });
         });
     }
 
     _init() {
-        this.button = this.getElement().querySelector('.audio-player__button');
-        this.canvas = this.getElement().querySelector('.audio-player__visualizer');
-        this.playButton = this.getElement().querySelector('.audio-player__button_play');
-        this.pauseButton = this.getElement().querySelector('.audio-player__button_pause');
+        this.button = this.player.querySelector('.audio-player__button');
+        this.canvas = this.player.querySelector('.audio-player__visualizer');
+        this.playButton = this.player.querySelector('.audio-player__button_play');
+        this.pauseButton = this.player.querySelector('.audio-player__button_pause');
         this.canvasContext = this.canvas.getContext('2d');
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.src = undefined;
 
         this.audio = new Audio();
 
-        if (!this.getData().musicSource) {
-            const blob = b64toBlob(this.getData().musicBase64, 'audio/wav');
-            this.getData().musicSource = (window.URL || window.webkitURL).createObjectURL(blob);
+        if (!this.state.musicSource) {
+            const blob = b64toBlob(this.props.musicBase64, 'audio/wav');
+            this.setState({musicSource: (window.URL || window.webkitURL).createObjectURL(blob)});
         }
 
-        this.audio.src = this.getData().musicSource;
+        this.audio.src = this.state.musicSource;
 
         this._initAudio();
-
-        this.isPlaying = false;
 
         this.button.addMultiEvents('click touchend', () => {
             const analyser = this.audioContext.createAnalyser();
@@ -133,7 +155,7 @@ export default class AudioPlayer extends TopComponent {
                 }
             };
 
-            if (this.isPlaying) {
+            if (this.state.isPlaying) {
                 this.stop();
 
                 cancelAnimationFrame(this.animation);

@@ -1,7 +1,8 @@
 import Menu from '../../components/Menu/Menu';
 import Footer from '../../components/Footer/Footer';
-import TopView from '../../components/TopView/TopView';
 import UserService from '../../services/UserService/UserService';
+
+import * as React from 'react';
 
 const unlogged = {
     buttons: [
@@ -29,7 +30,6 @@ const unlogged = {
 };
 
 const logged = {
-    method: 'get',
     buttons: [
         {
             name: 'multiplayer',
@@ -65,30 +65,26 @@ const logged = {
     login: ''
 };
 
-export default class Main extends TopView {
+export default class Main extends React.Component<any,any> {
+    constructor(props:any) {
+        super(props);
 
-    constructor() {
-        super({class: 'content__main'});
+        this.state = unlogged;
     }
 
-    rerender() {
-        this.removeComponents();
-        this.build();
-    }
+    render() {
+        // if (UserService.isLoggedIn()) {
+        //     logged.login = UserService.getLogin();
+        //     this.setState(logged);
+        // } else {
+        //     this.setState(unlogged);
+        // }
 
-    build() {
-        if (UserService.isLoggedIn()) {
-            logged.login = UserService.getLogin();
-            this.setData(logged);
-        } else {
-            this.setData(unlogged);
-        }
-
-        this._components = [
-            new Menu(this.getData()),
-            new Footer()
-        ];
-
-        super.build();
+        return(
+            <div className='content__main'>
+                <Menu {...this.state} />
+                <Footer/>
+            </div>
+        )
     }
 }

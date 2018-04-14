@@ -1,4 +1,4 @@
-import TopComponent from '../../../TopComponent/TopComponent';
+import * as React from 'react';
 import GameText from '../../GameText/GameText';
 import AudioPlayer from '../../AudioPlayer/AudioPlayer';
 import RecordPlayer from '../../RecordPlayer/RecordPlayer';
@@ -8,14 +8,15 @@ import {RECORDING_TEXT1, RECORDING_TEXT2, SEND_BUTTON} from '../../../../constan
 
 import './Recording.scss';
 
-export default class Recording extends TopComponent {
+//TODO: нормально переделать
+
+export default class Recording extends React.Component<any, any> {
     private _components: any[];
     private autoreverse: boolean;
 
-    constructor(data: any, autoreverse = false) {
-        super('div', {class: 'recording-stage'}, data);
-        this.autoreverse = autoreverse;
-        this._build();
+    constructor(props: any) {
+        super(props);
+        this.autoreverse = props.autoreverse || false;
     }
 
     getMusicURL() {
@@ -40,29 +41,33 @@ export default class Recording extends TopComponent {
     }
 
     getMusic() {
-        this._components[1].setSource(this.getData().musicSource);
+        this._components[1].setSource(this.props.musicSource);
+    }
+
+    getButton() {
+
     }
 
     render() {
-        return this.getElement();
-    }
-
-    _build() {
         this._components = [
             new GameText({text: RECORDING_TEXT1}),
-            new AudioPlayer(this.getData()),
+            new AudioPlayer(this.props),
             new GameText({text: RECORDING_TEXT2}),
-            new RecordPlayer(this.autoreverse),
+            new RecordPlayer({autorevere: this.autoreverse}),
             new Button(SEND_BUTTON)
         ];
 
-        this._components.forEach(element => {
-            this.append(element.render());
-        });
+        return (
+            <div className='recording-stage'>
+                <GameText />
+                {this._components.map(component => component.render())}
+            </div>
+        )
+    }
+
+    componentDidMount() {
         this.getMusic();
-
         this._initPlayers();
-
         this._initButton();
     }
 

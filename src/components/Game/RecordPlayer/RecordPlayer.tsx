@@ -1,9 +1,7 @@
-const recordPlayer = require('./RecordPlayer.xml');
-import TopComponent from '../../TopComponent/TopComponent';
+import * as React from 'react';
 import RecordService from '../../../services/RecorderService/RecorderService';
 
 import './RecordPlayer.scss';
-import DateTimeFormat = Intl.DateTimeFormat;
 
 function pad0(value: any, count: number) {
     let result = value.toString();
@@ -19,7 +17,7 @@ function format(times: number[]) {
             ${pad0(Math.floor(times[1]), 2)}`;
 }
 
-export default class RecordPlayer extends TopComponent {
+export default class RecordPlayer extends React.Component<any, any> {
     private autoreverse: boolean;
     private haveRecord: boolean;
     private button: HTMLElement;
@@ -31,17 +29,41 @@ export default class RecordPlayer extends TopComponent {
     private isRecording: boolean;
     private running: boolean;
 
-    constructor(autoreverse = false) {
-        super('div', {class: 'record-player'});
-        this.autoreverse = autoreverse;
+    private player: HTMLElement;
+
+    constructor(props:any) {
+        super(props);
+        this.autoreverse = props.autoreverse || false;
         this.haveRecord = false;
+
+        this.state = {
+            startButtonStyle: {},
+            stopButtonStyle: {},
+            timeStyle: {},
+            time: format([0, 0])
+        };
     }
 
     render() {
-        this._innerHTML(recordPlayer(this.getData()));
-        this._init();
+        return (
+            <div className='record-player' ref={(player: any) => this.player = player}>
+                <div className="record-player__button">
+                    <div className="record-player__button_start" style={this.state.startButtonStyle}>
+                        <i className="fa fa-circle"/>
+                    </div>
+                    <div className="record-player__button_stop" style={this.state.stopButtonStyle}>
+                        <i className="fa fa-stop"/>
+                    </div>
+                </div>
+                <div className="record-player__time-box">
+                    <div className="record-player__time" style={this.state.timeStyle}>{this.state.time}</div>
+                </div>
+            </div>
+        )
+    }
 
-        return this.getElement();
+    componentDidMount() {
+        this._init();
     }
 
     getMusicURL() {
@@ -77,8 +99,10 @@ export default class RecordPlayer extends TopComponent {
 
         this.isRecording = false;
 
-        this.stopButton.style.display = 'none';
-        this.startButton.style.display = 'block';
+        this.setState({
+            stopButtonStyle: {display: 'none'},
+            startButtonStyle: {display: 'block'}
+        });
 
         this.stopTimer();
         RecordService.stop(this.autoreverse);
@@ -88,10 +112,11 @@ export default class RecordPlayer extends TopComponent {
         this.isRecording = true;
         this.haveRecord = true;
 
-        this.stopButton.style.display = 'block';
-        this.startButton.style.display = 'none';
-
-        this.timeElement.style.opacity = '1';
+        this.setState({
+            stopButtonStyle: {display: 'block'},
+            startButtonStyle: {display: 'none'},
+            timeStyle: {opacity: '1'}
+        });
 
         if (this.time === null) {
             this.resetTimer();
@@ -128,14 +153,16 @@ export default class RecordPlayer extends TopComponent {
     }
 
     printTimer() {
-        this.timeElement.innerText = format(this.times);
+        this.setState({
+            time: format(this.times)
+        });
     }
 
     private _init() {
-        this.button = this.getElement().querySelector('.record-player__button');
-        this.startButton = this.getElement().querySelector('.record-player__button_start');
-        this.stopButton = this.getElement().querySelector('.record-player__button_stop');
-        this.timeElement = this.getElement().querySelector('.record-player__time');
+        this.button = this.player.querySelector('.record-player__button');
+        this.startButton = this.player.querySelector('.record-player__button_start');
+        this.stopButton = this.player.querySelector('.record-player__button_stop');
+        this.timeElement = this.player.querySelector('.record-player__time');
 
         this.isRecording = false;
         this.running = false;
